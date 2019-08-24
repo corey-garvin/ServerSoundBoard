@@ -2,6 +2,7 @@
   max-width: 900px;
   margin: 0 auto; }
   .container img {
+    display: block;
     width: 100px;
     cursor: pointer; }
     .container img.slide-right {
