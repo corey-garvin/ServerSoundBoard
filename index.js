@@ -2,7 +2,7 @@ const dirTree = require("directory-tree");
 const express = require("express");
 const app = express();
 const port = 3000;
-const soundsRoot = "/Users/corey/Downloads/music/";
+const soundsRoot = "/Users/designer_2002/Desktop/ServerSoundBoard/sounds/";
 const soundPlayer = require("play-sound")(opts = {});
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -32,7 +32,7 @@ function trimPath(tree) {
     if (!tree) {
         return;
     }
-    tree.path = tree.path.replace("/Users/corey/Downloads/music/", "");
+    tree.path = tree.path.replace("/Users/designer_2002/Desktop/ServerSoundBoard/sounds/", "");
     (tree.children || []).forEach(trimPath);
 }
 

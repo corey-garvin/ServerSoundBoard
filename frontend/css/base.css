@@ -1,0 +1,24 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto; }
+  .container img {
+    width: 100px;
+    cursor: pointer; }
+    .container img.slide-right {
+      -webkit-transform: translateX(800px);
+      -ms-transform: translateX(800px);
+      transform: translateX(800px);
+      -webkit-transition: all 1.5s ease;
+      -o-transition: all 1.5s ease;
+      transition: all 1.5s ease; }
+    .container img.slide-left {
+      -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-transition: all 1.5s ease;
+      -o-transition: all 1.5s ease;
+      transition: all 1.5s ease; }
+  .container button {
+    font-size: 20px;
+    padding: 4px 10px;
+    cursor: pointer; }
