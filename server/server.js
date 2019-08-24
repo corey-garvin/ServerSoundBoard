@@ -6,12 +6,13 @@ const soundsRoot = "/Users/corey/Downloads/music/";
 const soundPlayer = require("play-sound")(opts = {});
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Dude, there's nothing here!"));
+app.get("/", (req, res) => res.sendFile(__direname + "/index.html"));
 
 // Get a tree of files/folders
 app.get("/listing", (req, res) => {
