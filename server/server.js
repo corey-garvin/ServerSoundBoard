@@ -1,4 +1,3 @@
-const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dirTree = require("directory-tree");
@@ -7,6 +6,7 @@ var fs = require("fs");
 var http = require("http");
 const soundPlayer = require("play-sound")(opts = {});
 
+const app = express();
 const port = 3000;
 const soundsRoot = "/Users/corey/Downloads/sounds/";
 
