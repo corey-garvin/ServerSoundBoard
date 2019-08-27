@@ -1,5 +1,3 @@
-const app = express();
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const dirTree = require("directory-tree");
 const express = require("express");
@@ -7,11 +5,12 @@ var fs = require("fs");
 var http = require("http");
 const soundPlayer = require("play-sound")(opts = {});
 
+const app = express();
 const port = 3000;
 const soundsRoot = "/Users/corey/Downloads/sounds/";
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 // Set content type for all endpoints
 app.use((req, res, next) => {
@@ -28,8 +27,8 @@ app.get("/listing", (req, res) => res.json(pathInfo(soundsRoot).children));
 // Play a sound
 app.post("/play", (req, res) => {
     const file = soundsRoot + req.body.file;
-    soundPlayer.play(soundsRoot + file, function(err) {
-        console.log("Could not find/play audio file: " + file);
+    soundPlayer.play(file, function(err) {
+        console.log("Could not find/play audio file: " + file + " - received error: " + err);
     });
     res.json(pathInfo(file));
 });
