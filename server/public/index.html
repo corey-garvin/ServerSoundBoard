@@ -3,14 +3,19 @@
     <head>
         <title>Jobs Done</title>
         <link rel="stylesheet" type="text/css" href="css/base.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
-
         <div class="container">
             <img class="play-button" id="peon" src="img/peon.png" />
             <img class="play-button" id="peasant" src="img/peasant.png" />
         </div>
-        
+
+        <div id="app">
+            {{ message }}
+        </div>
+
         <script src="js/play.js"></script>
+        <script defer src="js/index.js"></script>
     </body>
 </html>
