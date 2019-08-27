@@ -4,6 +4,7 @@
         <title>Jobs Done</title>
         <link rel="stylesheet" type="text/css" href="css/base.css">
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -12,10 +13,13 @@
         </div>
 
         <div id="app">
-            {{ message }}
+            <sound v-for="img in imgList"
+                   v-bind:image="img"
+                   v-bind:key="img.id">
+            </sound>
         </div>
 
         <script src="js/play.js"></script>
-        <script defer src="js/index.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>
