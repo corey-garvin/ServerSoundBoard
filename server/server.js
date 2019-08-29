@@ -7,7 +7,7 @@ const soundPlayer = require("play-sound")(opts = {});
 
 const app = express();
 const port = 3000;
-const soundsRoot = "/Users/corey/Downloads/sounds/";
+const soundsRoot = "/Users/jteves/Downloads";
 
 const path = require("path");
 
@@ -31,7 +31,8 @@ app.get("/listing", (req, res) => res.json(pathInfo(soundsRoot).children));
 
 // Play a sound
 app.post("/play", (req, res) => {
-    const file = soundsRoot + req.body.file;
+    console.log(req.body);
+    const file = soundsRoot + req.body.body.file;
     soundPlayer.play(file, function(err) {
         console.log("Could not find/play audio file: " + file + " - received error: " + err);
     });

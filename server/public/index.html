@@ -7,18 +7,13 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
-        <div class="container">
-            <img class="play-button" id="peon" src="img/peon.png" />
-            <img class="play-button" id="peasant" src="img/peasant.png" />
-        </div>
-
-        <div id="app">
+        <div id="container">
             <sound v-for="img in imgList"
                    v-bind:image="img"
-                   v-bind:key="img.id">
+                   v-bind:key="img.id"
+                   v-on:click.native="playSound">
             </sound>
         </div>
-
         <script src="js/play.js"></script>
         <script src="js/index.js"></script>
     </body>

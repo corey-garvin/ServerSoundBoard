@@ -4,23 +4,31 @@ Vue.component('sound', {
 });
 
 var app = new Vue({
-    el: '#app',
+    el: '#container',
     data: {
         imgList: [
-            {id: 0, idTag: "peon", img: "img/peon.png"},
+            {id: 0, idTag: "peon", img: "img/peon.png", file: "/sounds/acknowledge1.wav"},
             {id: 1, idTag: "peasent", img: "img/peasant.png"}
         ],
         info: []
     },
-
-    mounted() {
-        axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-            .then(response => {
-                console.log(response);
-                for(var item in response) {
-                    this.info.push(item);
-                }
-                console.log(this.info);
+    methods: {
+        playSound: function() {
+            axios.post('/play', {
+                body: this.imgList[0],
+                headers:{'Content-Type': 'application/json'}
             });
+        }
+    },
+    mounted() {
+        const instance = axios.create({
+            baseURL: "http://localhost:3000",
+            headers:{'Content-Type': 'application/json'}
+        });
+
+        instance.post('/import', {
+            url: "http://www.thanatosrealms.com/war2/sounds/orcs/basic-orc-voices/acknowledge1.wav",
+            path: "/sounds"
+        });
     }
 })
