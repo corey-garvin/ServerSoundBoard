@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jobs Done</title>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <sound v-for="img in imgList"
+                   v-bind:image="img"
+                   v-bind:key="img.id"
+                   v-on:click.native="playSound">
+            </sound>
+        </div>
+        <script src="js/play.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>

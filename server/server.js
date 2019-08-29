@@ -7,26 +7,32 @@ const soundPlayer = require("play-sound")(opts = {});
 
 const app = express();
 const port = 3000;
-const soundsRoot = "/Users/corey/Downloads/sounds/";
+const soundsRoot = "/Users/jteves/Downloads";
+
+const path = require("path");
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 // Set content type for all endpoints
-app.use((req, res, next) => {
-    res.contentType("application/json");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.contentType("application/json");
+//     next();
+// });
+
+app.set("view engine", "html");
+app.use("/", express.static(path.join(__dirname, 'public')));
 
 // Default route (replace this)
-app.get("/", (req, res) => res.send("Dude, there's nothing here!"));
+// app.get("/", (req, res) => res.render(__dirname + '/public/index.html'));
 
 // Get a tree of files/folders
 app.get("/listing", (req, res) => res.json(pathInfo(soundsRoot).children));
 
 // Play a sound
 app.post("/play", (req, res) => {
-    const file = soundsRoot + req.body.file;
+    console.log(req.body);
+    const file = soundsRoot + req.body.body.file;
     soundPlayer.play(file, function(err) {
         console.log("Could not find/play audio file: " + file + " - received error: " + err);
     });
