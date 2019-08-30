@@ -1,0 +1,4 @@
+/node_modules/
+/src/app/node_modules/
+/src/app/public/*.mp3
+/src/app/public/*.wav
