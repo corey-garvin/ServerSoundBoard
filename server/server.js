@@ -4,21 +4,22 @@ const express = require("express");
 var fs = require("fs");
 var http = require("http");
 const soundPlayer = require("play-sound")(opts = {});
-
 const app = express();
 const port = 3000;
-const soundsRoot = "/Users/jteves/Downloads";
-
+const soundsRoot = "/Users/justin/Downloads/sounds/";
 const path = require("path");
 
 // Middleware
 app.use(express.json());
 app.use(cors());
-// Set content type for all endpoints
-// app.use((req, res, next) => {
-//     res.contentType("application/json");
-//     next();
-// });
+
+//Set content type for all endpoints
+app.use((req, res, next) => {
+    res.type("json");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 app.set("view engine", "html");
 app.use("/", express.static(path.join(__dirname, 'public')));
@@ -28,13 +29,17 @@ app.use("/", express.static(path.join(__dirname, 'public')));
 
 // Get a tree of files/folders
 app.get("/listing", (req, res) => res.json(pathInfo(soundsRoot).children));
+app.get("/mongo", (req, res) => {
+    res.send(sound)
+})
 
 // Play a sound
 app.post("/play", (req, res) => {
-    console.log(req.body);
-    const file = soundsRoot + req.body.body.file;
+    const file = soundsRoot + req.body.name;
     soundPlayer.play(file, function(err) {
-        console.log("Could not find/play audio file: " + file + " - received error: " + err);
+        if(err) {
+            console.log("Could not find/play audio file: " + file + " - received error: " + err);
+        }
     });
     res.json(pathInfo(file));
 });
@@ -77,8 +82,7 @@ function pathInfo(path) {
 function convertToRelativePath(tree) {
     // Adjust the paths to be relative to our sounds dir, instead of showing
     // the absolute path
-    tree.path = tree.path.replace(soundsRoot, "");
-    (tree.children || []).forEach(convertToRelativePath);
+    tree.path = tree.path.replace(soundsRoot, ""); (tree.children || []).forEach(convertToRelativePath);
     return tree;
 }
 
